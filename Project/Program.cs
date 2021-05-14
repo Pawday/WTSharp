@@ -81,15 +81,7 @@ namespace ConsoleApp
             
             //Добавление в файл Excell новой таблици с именем Отчет
             ExcelWorksheet mainTable = excelFile.Worksheets.Add("Отчет");
-
-
-            //Установка ширины колонок в файле Excel
-            mainTable.Cells[0, 0].Column.SetWidth(175,LengthUnit.Pixel);
-            mainTable.Cells[0, 1].Column.SetWidth(150,LengthUnit.Pixel);
-            mainTable.Cells[0, 2].Column.SetWidth(120,LengthUnit.Pixel);
-            mainTable.Cells[0, 3].Column.SetWidth(154,LengthUnit.Pixel);
-            mainTable.Cells[0, 4].Column.SetWidth(150,LengthUnit.Pixel);
-
+            
             //Запись параметров продукта в таблицу
             WriteProductToTable(mainTable, product);
 
@@ -105,6 +97,14 @@ namespace ConsoleApp
         /// <param name="product">объект с данными</param>
         private static void WriteProductToTable(ExcelWorksheet table, Product product)
         {
+            
+            //Установка ширины колонок в файле Excel
+            table.Cells[0, 0].Column.SetWidth(175,LengthUnit.Pixel);
+            table.Cells[0, 1].Column.SetWidth(150,LengthUnit.Pixel);
+            table.Cells[0, 2].Column.SetWidth(120,LengthUnit.Pixel);
+            table.Cells[0, 3].Column.SetWidth(154,LengthUnit.Pixel);
+            table.Cells[0, 4].Column.SetWidth(150,LengthUnit.Pixel);
+            
             table.Cells[0, 2].Value = "ОТЧЕТ ЦЕХА №" + product.FabricId;
 
 
