@@ -163,225 +163,42 @@ namespace ConsoleApp
         }
     }
     
-    public class Notice
+    public static class Notice
+    {
+        public static void SendError(String error)
         {
-            public static void SendError(String error)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(error);
-                Console.ForegroundColor = ConsoleColor.White;
-            }
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(error);
+            Console.ForegroundColor = ConsoleColor.White;
         }
-    
-        public class Product
-        {
-            public String Name; //Наименование изделия;
-            public String Code; //Код изделия
-            public String MeasurementUnit; //Единица измерения
-            public int UnitPrice; //Цена за единицу измеряемого изделия
-            public int FabricId; //Номер цеха
-            public int StorageNumber; //Номер склада
-            public String StorageName; //Наименование склада
-            public int Invoice; //Номер накладной
-            public DateTime ContractDate; //Дата в договоре
-            public DateTime InvoiceDate; //Дата в накладной
-            public int Amount; //Количество
-            public int ContractNumber; //Номер договора;
-            public Person Diler; //Поставщик
-            public Person Buyer; //Покупатель
-    
-            public Product()
-            {
-                this.Diler = new Person();
-                this.Buyer = new Person();
-            }
-    
-            public bool SetParameter(int pNum, String value)
-            {
-                try
-                {
-                    if (pNum == 0)
-                    {
-                        this.Name = value;
-                        return true;
-                    }
-                    if (pNum == 1)
-                    {
-                        this.Code = value;
-                        return true;
-                    }
-                    if (pNum == 2)
-                    {
-                        this.MeasurementUnit = value;
-                        return true;
-                    }
-                    if (pNum == 3)
-                    {
-                        this.UnitPrice = Convert.ToInt32(value);
-                        return CheckNumberSign(this.UnitPrice);
-                    }
-                    if (pNum == 4)
-                    {
-                        this.FabricId = Convert.ToInt32(value);
-                        return CheckNumberSign(this.FabricId);
-                    }
-                    if (pNum == 5)
-                    {
-                        this.StorageNumber = Convert.ToInt32(value);
-                        return CheckNumberSign(this.StorageNumber);
-                    }
-                    if (pNum == 6)
-                    {
-                        this.StorageName = value;
-                        return true;
-                    }
-                    if (pNum == 7)
-                    {
-                        this.Invoice = Convert.ToInt32(value);
-                        return CheckNumberSign(this.Invoice);
-                    }
-                    if (pNum == 8)
-                    {
-                        //ДД.ММ.ГГГГ
-                        DateTime? date = ConvertToDate(value);
-                        
-                        if (date == null)
-                        {
-                            return false;
-                        }
-    
-                        this.ContractDate = (DateTime) date;
-                        return true;
-                    }
-                    if (pNum == 9)
-                    {
-                        //ДД.ММ.ГГГГ
-                        DateTime? date = ConvertToDate(value);
-                        
-                        if (date == null)
-                        {
-                            return false;
-                        }
-    
-                        this.InvoiceDate = (DateTime) date;
-                        return true;
-                    }
-                    if (pNum == 10)
-                    {
-                        this.Amount = Convert.ToInt32(value);
-                        return CheckNumberSign(this.Amount);
-                    }
-                    if (pNum == 11)
-                    {
-                        this.ContractNumber = Convert.ToInt32(value);
-                        return CheckNumberSign(this.ContractNumber);
-                    }
-                }
-                catch (FormatException)
-                {
-                    Notice.SendError("Не удалось превести значение к числу, повторите попытку");
-                    return false;
-                }
-                
-                Console.WriteLine("Product.SetParameter: Введён неизвестный номер параметра (pNum = " + pNum + ")");
-                return false;
-            }
-    
-            
-    
-            private static bool CheckNumberSign(int num)
-            {
-                //num = -12
-                if (num <= 0)
-                {
-                    Notice.SendError("Параметр должен быть больше нуля");
-                    return false;
-                }
-                else return true;
-            }
-    
-            private static DateTime? ConvertToDate(String str)
-            {
-                //a.bb.ccc.dddd
-                String[] dateParts = str.Split('.');
+    }
 
-                dateParts = new[] {"0","asdw","wdqho"};
-                
-                if (dateParts.Length != 3)
-                {
-                    Notice.SendError("Неверный формат даты, используйте формат ДД.ММ.ГГГГ");
-                    return null;
-                }
-    
-                String dayStr = dateParts[0];
-                String mounthStr = dateParts[1];
-                String yearStr = dateParts[2];
-    
-                if 
-                (
-                    dayStr.Length != 2 ||
-                    mounthStr.Length != 2 ||
-                    yearStr.Length != 4
-                )
-                {
-                    Notice.SendError("Неверный формат даты, используйте формат ДД.ММ.ГГГГ");
-                    return null;
-                }
-                        
-                        
-                int day;
-                int month;
-                int year;
-    
-                try
-                {
-                    day = Convert.ToInt32(dateParts[0]);
-                    month = Convert.ToInt32(dateParts[1]);
-                    year = Convert.ToInt32(dateParts[2]);
-                }
-                catch (Exception)
-                {
-                    Notice.SendError("Значения должны быть в числовом виде, повторите попытку");
-                    return null;
-                }
-    
-                DateTime ret;
-                
-                try
-                {
-                    ret = new DateTime(year, month, day);
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    Notice.SendError("Указана невозможная дата, попробуйте снова");
-                    return null;
-                }
-    
-                return ret;
-    
-            }
-    
-            
-        }
-    
-        public class Person
+    public class Product
+    {
+        public String Name; //Наименование изделия;
+        public String Code; //Код изделия
+        public String MeasurementUnit; //Единица измерения
+        public int UnitPrice; //Цена за единицу измеряемого изделия
+        public int FabricId; //Номер цеха
+        public int StorageNumber; //Номер склада
+        public String StorageName; //Наименование склада
+        public int Invoice; //Номер накладной
+        public DateTime ContractDate; //Дата в договоре
+        public DateTime InvoiceDate; //Дата в накладной
+        public int Amount; //Количество
+        public int ContractNumber; //Номер договора;
+        public Person Diler; //Поставщик
+        public Person Buyer; //Покупатель
+
+        public Product()
         {
-            public String Name;
-            public String Surname;
-            public String City;
-            public String PhoneNumber;
-    
-            public Person() {}
-    
-            public Person(string name, string surname, string city, string phoneNumber)
-            {
-                Name = name;
-                Surname = surname;
-                City = city;
-                PhoneNumber = phoneNumber;
-            }
-    
-            public bool SetParameter(int pNum, String value)
+            this.Diler = new Person();
+            this.Buyer = new Person();
+        }
+
+        public bool SetParameter(int pNum, String value)
+        {
+            try
             {
                 if (pNum == 0)
                 {
@@ -390,43 +207,227 @@ namespace ConsoleApp
                 }
                 if (pNum == 1)
                 {
-                    this.Surname = value;
+                    this.Code = value;
                     return true;
                 }
                 if (pNum == 2)
                 {
-                    this.City = value;
+                    this.MeasurementUnit = value;
                     return true;
                 }
                 if (pNum == 3)
                 {
-                    if (value.Length != 11)
+                    this.UnitPrice = Convert.ToInt32(value);
+                    return CheckNumberSign(this.UnitPrice);
+                }
+                if (pNum == 4)
+                {
+                    this.FabricId = Convert.ToInt32(value);
+                    return CheckNumberSign(this.FabricId);
+                }
+                if (pNum == 5)
+                {
+                    this.StorageNumber = Convert.ToInt32(value);
+                    return CheckNumberSign(this.StorageNumber);
+                }
+                if (pNum == 6)
+                {
+                    this.StorageName = value;
+                    return true;
+                }
+                if (pNum == 7)
+                {
+                    this.Invoice = Convert.ToInt32(value);
+                    return CheckNumberSign(this.Invoice);
+                }
+                if (pNum == 8)
+                {
+                    //ДД.ММ.ГГГГ
+                    DateTime? date = ConvertToDate(value);
+                    
+                    if (date == null)
                     {
-                        Notice.SendError("Номер телефона должен быть указан в формате 8XXXXXXXXXX");
                         return false;
                     }
 
-                    if (value[0] != '8')
-                    {
-                        Notice.SendError("Первая цифра телефонного номера должна быть 8");
-                        return false;
-                    }
-    
-                    try
-                    {
-                        Convert.ToInt64(value);
-                    }
-                    catch (Exception)
-                    {
-                        Notice.SendError("Телефонный номер должен состоять из цифр");
-                        return false;
-                    }
-                    
-                    this.PhoneNumber = value;
+                    this.ContractDate = (DateTime) date;
                     return true;
                 }
-                
-                Console.WriteLine("Person.SetParameter: Введён неизвестный номер параметра (pNum = " + pNum + ")");
+                if (pNum == 9)
+                {
+                    //ДД.ММ.ГГГГ
+                    DateTime? date = ConvertToDate(value);
+                    
+                    if (date == null)
+                    {
+                        return false;
+                    }
+
+                    this.InvoiceDate = (DateTime) date;
+                    return true;
+                }
+                if (pNum == 10)
+                {
+                    this.Amount = Convert.ToInt32(value);
+                    return CheckNumberSign(this.Amount);
+                }
+                if (pNum == 11)
+                {
+                    this.ContractNumber = Convert.ToInt32(value);
+                    return CheckNumberSign(this.ContractNumber);
+                }
+            }
+            catch (FormatException)
+            {
+                Notice.SendError("Не удалось превести значение к числу, повторите попытку");
                 return false;
             }
-        }}
+            
+            Console.WriteLine("Product.SetParameter: Введён неизвестный номер параметра (pNum = " + pNum + ")");
+            return false;
+        }
+
+        
+
+        private static bool CheckNumberSign(int num)
+        {
+            //num = -12
+            if (num <= 0)
+            {
+                Notice.SendError("Параметр должен быть больше нуля");
+                return false;
+            }
+            else return true;
+        }
+
+        private static DateTime? ConvertToDate(String str)
+        {
+            //a.bb.ccc.dddd
+            String[] dateParts = str.Split('.');
+
+            dateParts = new[] {"0","asdw","wdqho"};
+            
+            if (dateParts.Length != 3)
+            {
+                Notice.SendError("Неверный формат даты, используйте формат ДД.ММ.ГГГГ");
+                return null;
+            }
+
+            String dayStr = dateParts[0];
+            String mounthStr = dateParts[1];
+            String yearStr = dateParts[2];
+
+            if 
+            (
+                dayStr.Length != 2 ||
+                mounthStr.Length != 2 ||
+                yearStr.Length != 4
+            )
+            {
+                Notice.SendError("Неверный формат даты, используйте формат ДД.ММ.ГГГГ");
+                return null;
+            }
+                    
+                    
+            int day;
+            int month;
+            int year;
+
+            try
+            {
+                day = Convert.ToInt32(dateParts[0]);
+                month = Convert.ToInt32(dateParts[1]);
+                year = Convert.ToInt32(dateParts[2]);
+            }
+            catch (Exception)
+            {
+                Notice.SendError("Значения должны быть в числовом виде, повторите попытку");
+                return null;
+            }
+
+            DateTime ret;
+            
+            try
+            {
+                ret = new DateTime(year, month, day);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Notice.SendError("Указана невозможная дата, попробуйте снова");
+                return null;
+            }
+
+            return ret;
+
+        }
+
+        
+    }
+
+    public class Person
+    {
+        public String Name;
+        public String Surname;
+        public String City;
+        public String PhoneNumber;
+
+        public Person() {}
+
+        public Person(string name, string surname, string city, string phoneNumber)
+        {
+            Name = name;
+            Surname = surname;
+            City = city;
+            PhoneNumber = phoneNumber;
+        }
+
+        public bool SetParameter(int pNum, String value)
+        {
+            if (pNum == 0)
+            {
+                this.Name = value;
+                return true;
+            }
+            if (pNum == 1)
+            {
+                this.Surname = value;
+                return true;
+            }
+            if (pNum == 2)
+            {
+                this.City = value;
+                return true;
+            }
+            if (pNum == 3)
+            {
+                if (value.Length != 11)
+                {
+                    Notice.SendError("Номер телефона должен быть указан в формате 8XXXXXXXXXX");
+                    return false;
+                }
+
+                if (value[0] != '8')
+                {
+                    Notice.SendError("Первая цифра телефонного номера должна быть 8");
+                    return false;
+                }
+
+                try
+                {
+                    Convert.ToInt64(value);
+                }
+                catch (Exception)
+                {
+                    Notice.SendError("Телефонный номер должен состоять из цифр");
+                    return false;
+                }
+                
+                this.PhoneNumber = value;
+                return true;
+            }
+            
+            Console.WriteLine("Person.SetParameter: Введён неизвестный номер параметра (pNum = " + pNum + ")");
+            return false;
+        }
+    }
+}
