@@ -186,7 +186,7 @@ namespace ConsoleApp
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(error);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ResetColor();
         }
     }
 
