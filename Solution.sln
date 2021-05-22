@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Project\MainApp.csproj", "{AA162488-FB8F-4FE8-8284-01B212F8F6F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumsAndArrays", "EnumsAndArrays\EnumsAndArrays.csproj", "{105BCFF6-B6C8-4793-A53C-BA7DE0F09236}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{AA162488-FB8F-4FE8-8284-01B212F8F6F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA162488-FB8F-4FE8-8284-01B212F8F6F7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AA162488-FB8F-4FE8-8284-01B212F8F6F7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{105BCFF6-B6C8-4793-A53C-BA7DE0F09236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{105BCFF6-B6C8-4793-A53C-BA7DE0F09236}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{105BCFF6-B6C8-4793-A53C-BA7DE0F09236}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{105BCFF6-B6C8-4793-A53C-BA7DE0F09236}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
